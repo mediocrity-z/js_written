@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写bind</title>
+</head>
+<body>
+    <!-- 判断调用对象是否是函数，不是则返回 -->
+    <!-- 保存当前函数的引用，获取其余传入参数值 -->
+    <!-- 创建一个函数后返回 -->
+    <!-- 函数内部使用apply来绑定函数调用，需要判断函数作为构造函数的情况
+        ，这个时候需要传入当前函数的this给apply调用，其余情况都传入指定的上下文对象 -->
+    <script>
+      Function.prototype.Bind=function(context){
+          if(typeof context !=='function'){
+              return
+          }
+          let args=[...arguments].slice()
+          let fn=this
+          return function Fn(){
+              return fn.apply(this instanceof Fn?this:context,args.concat(...arguments))
+          }
+      }
+    </script>
+</body>
+</html>

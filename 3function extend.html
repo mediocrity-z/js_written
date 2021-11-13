@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js继承的几种方式</title>
+</head>
+<body>
+    <script>
+        // 1.原型链继承，把父类的实例对象作为子类的原型，主要问题是子类不能向父类传参
+        // function Father(){
+        //     this.money=100
+        // }
+        // function Son(){
+
+        // }
+        // Son.prototype=new Father()
+        // let son1=new Son()
+        // console.log(son1.money);//100
+
+        // 2.盗用构造函数继承，用call方法改变父类的指向，子类能向父类传参，缺点是子类不能访问父类原型上定义的方法
+//         function Father(money){
+//             this.money=money
+//         }
+//         Father.prototype.sayHi=function(){
+//             console.log('hello');
+//         }
+//         function Son(money){
+// Father.call(this,money)
+//         }
+//         let son1=new Son(100)
+//         console.log(son1.money);//100
+//         son1.sayHi()//报错
+
+// 组合继承：结合了原型链继承和盗用构造函数继承，弥补了它们的不足
+//  function Father(money){
+//             this.money=money
+//         }
+//         Father.prototype.sayHi=function(){
+//             console.log('hello');
+//         }
+//         function Son(money){
+//             // 继承父类属性
+// Father.call(this,money)
+//         }
+//         // 继承父类方法
+//         Son.prototype=new Father()
+// let son1=new Son(100)
+// console.log(son1.money);//100
+// son1.sayHi()//hello
+
+// 寄生组合式继承：通过盗用构造函数继承属性，取得父类原型的一个副本，只调用了一次父类构造函数，避免了子类原型上的属性，因此效率比组合继承高
+function object(obj){
+    function F(){}
+    F.prototype=obj
+    return new F()
+}
+
+function inheritPropotype(father,son){
+    var prototype=object(father.prototype)
+    prototype.constructor=son
+    son.prototype=prototype
+}
+
+function Father(money){
+    this.money=money
+}
+Father.prototype.sayHi=function(){
+    console.log('hello');
+}
+function Son(money,age){
+    Father.call(this,money)
+    this.age=age
+}
+
+inheritPropotype(Father,Son)
+
+Son.prototype.say=function(){
+    console.log(this.age);
+}
+
+let son1=new Son(100,20)
+son1.say()
+    </script>
+</body>
+</html>

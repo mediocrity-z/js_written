@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js遍历对象的三种方式和区别</title>
+</head>
+
+<body>
+    <script>
+        // Object.keys(obj) 该方法只打印出对象的可枚举属性
+        // let obj = {}
+        // Object.defineProperty(obj,'name',{
+        //     enumerable:true,
+        //     value:'何超'
+        // })
+        // Object.defineProperty(obj,'age',{
+        //     enumerable:false,
+        //     value:20
+        // })
+        // obj.__proto__ = { 'school': 'HNU' }
+        // const keys = Object.keys(obj)
+        // for (let i of keys) {
+        //     let value = obj[i]
+        //     console.log(value);//'何超'
+        // }
+        
+        // for in 该方法打印出对象的可枚举属性以及该对象原型上的属性
+        // let obj={}
+        // Object.defineProperty(obj,'name',{
+        //     enumerable:true,
+        //     value:'何超'
+        // })
+        // Object.defineProperty(obj,'age',{
+        //     value:20,
+        //     enumerable:false
+        // })
+        // obj.__proto__={'school':'HNU'}
+        // for(let i in obj){
+        //     console.log(obj[i]);//'何超','HNU'
+        // }
+
+        // Object.getOwnPropertyNames(obj) 该方法能打印出对象的可枚举和不可枚举属性
+        let obj={}
+        Object.defineProperty(obj,'name',{
+            enumerable:true,
+            value:'何超'
+        })
+        Object.defineProperty(obj,'age',{
+            value:20,
+            enumerable:false
+        })
+        obj.__proto__={'school':'HNU'}
+       const keys= Object.getOwnPropertyNames(obj)
+       for(let i of keys){
+           console.log(obj[i]);//'何超',20
+       }
+    </script>
+</body>
+
+</html>

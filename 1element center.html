@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素水平垂直居中</title>
+    <style>
+        /* flex方式居中 */
+        /* html,body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main{
+            width: 100px;
+            height: 100px;
+ background-color: rgb(233, 23, 23);
+        } */
+
+
+        /* 定位方式1 */
+        /* html,body{
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+        .main{
+position: absolute;
+top: 50%;
+left: 50%;
+background-color: rgb(218, 36, 36);
+transform: translate(-50%,-50%);
+width: 200px;
+height: 200px;
+        } */
+
+        /* 定位方式2 */
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .main {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgb(31, 245, 23);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main"></div>
+
+</body>
+
+</html>
